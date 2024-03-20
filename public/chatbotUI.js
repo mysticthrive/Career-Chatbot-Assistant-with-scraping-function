@@ -425,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         const data = await response.json();
-        const botResponse = data.response;
+        const botResponse = data.response.replace(/(?:\r\n|\r|\n)/g, "<br>");
 
         // Remove typing animation and append bot response to chat history
         removeTypingAnimation();
@@ -485,10 +485,7 @@ document.addEventListener("DOMContentLoaded", function () {
     messageBubble.style.padding = "12px";
     messageBubble.style.borderRadius = "10px";
     messageBubble.style.maxWidth = "80%";
-    messageBubble.innerHTML = message
-      .replace(/\n/g, "<br>")
-      .replace(/\*\*(.*?)\*\*/g, "<b></b>")
-      .replace(/###(.*?)###/g, "<h3></h3>");
+    messageBubble.innerHTML = message;
 
     messageElement.appendChild(iconElement);
     messageElement.appendChild(messageBubble);
